@@ -209,14 +209,14 @@ std::istream& operator>>(std::istream& is, primitive::d_t& v) { double iv; is >>
 
 namespace std
 {
-    template <> struct hash<primitive::i8_t> { std::size_t operator()(const primitive::i8_t& v) const noexcept { return v.to<std::size_t>(); } };
-    template <> struct hash<primitive::ui8_t> { std::size_t operator()(const primitive::ui8_t& v) const noexcept { return v.to<std::size_t>(); } };
-    template <> struct hash<primitive::i16_t> { std::size_t operator()(const primitive::i16_t& v) const noexcept { return v.to<std::size_t>(); } };
-    template <> struct hash<primitive::ui16_t> { std::size_t operator()(const primitive::ui16_t& v) const noexcept { return v.to<std::size_t>(); } };
-    template <> struct hash<primitive::i32_t> { std::size_t operator()(const primitive::i32_t& v) const noexcept { return v.to<std::size_t>(); } };
-    template <> struct hash<primitive::ui32_t> { std::size_t operator()(const primitive::ui32_t& v) const noexcept { return v.to<std::size_t>(); } };
-    template <> struct hash<primitive::i64_t> { std::size_t operator()(const primitive::i64_t& v) const noexcept { return v.to<std::size_t>(); } };
-    template <> struct hash<primitive::ui64_t> { std::size_t operator()(const primitive::ui64_t& v) const noexcept { return v.to<std::size_t>(); } };
-    template <> struct hash<primitive::f_t> { std::size_t operator()(const primitive::f_t& v) const noexcept { return v.to<std::size_t>(); } };
-    template <> struct hash<primitive::d_t> { std::size_t operator()(const primitive::d_t& v) const noexcept { return v.to<std::size_t>(); } };
+    template <> struct hash<primitive::i8_t> { std::size_t operator()(const primitive::i8_t& v) const noexcept { return std::hash<int8_t>()(v.raw()); } };
+    template <> struct hash<primitive::ui8_t> { std::size_t operator()(const primitive::ui8_t& v) const noexcept { return std::hash<uint8_t>()(v.raw()); } };
+    template <> struct hash<primitive::i16_t> { std::size_t operator()(const primitive::i16_t& v) const noexcept { return std::hash<int16_t>()(v.raw()); } };
+    template <> struct hash<primitive::ui16_t> { std::size_t operator()(const primitive::ui16_t& v) const noexcept { return std::hash<uint16_t>()(v.raw()); } };
+    template <> struct hash<primitive::i32_t> { std::size_t operator()(const primitive::i32_t& v) const noexcept { return std::hash<int32_t>()(v.raw()); } };
+    template <> struct hash<primitive::ui32_t> { std::size_t operator()(const primitive::ui32_t& v) const noexcept { return std::hash<uint32_t>()(v.raw()); } };
+    template <> struct hash<primitive::i64_t> { std::size_t operator()(const primitive::i64_t& v) const noexcept { return std::hash<int64_t>()(v.raw()); } };
+    template <> struct hash<primitive::ui64_t> { std::size_t operator()(const primitive::ui64_t& v) const noexcept { return std::hash<uint64_t>()(v.raw()); } };
+    template <> struct hash<primitive::f_t> { std::size_t operator()(const primitive::f_t& v) const noexcept { return std::hash<float>()(v.raw()); } };
+    template <> struct hash<primitive::d_t> { std::size_t operator()(const primitive::d_t& v) const noexcept { return std::hash<double>()(v.raw()); } };
 }
