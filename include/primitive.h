@@ -1,4 +1,8 @@
 
+#pragma once
+
+#include <cstdint>
+#include <iostream>
 #include <string>
 #include <type_traits>
 
@@ -130,21 +134,21 @@ namespace primitive
     using ui32_t = detail::primitive<uint32_t>;
     using i64_t = detail::primitive<int64_t>;
     using ui64_t = detail::primitive<uint64_t>;
-    using float_t = detail::primitive<float>;
-    using double_t = detail::primitive<double>;
+    using f_t = detail::primitive<float>;
+    using d_t = detail::primitive<double>;
 
     namespace literals
     {
-        i8_t operator "" _i8(unsigned long long int v)      { return i8_t(v); }
-        ui8_t operator "" _ui8(unsigned long long int v)    { return ui8_t(v); }
-        i16_t operator "" _i16(unsigned long long int v)    { return i16_t(v); }
-        ui16_t operator "" _ui16(unsigned long long int v)  { return ui16_t(v); }
-        i32_t operator "" _i32(unsigned long long int v)    { return i32_t(v); }
-        ui32_t operator "" _ui32(unsigned long long int v)  { return ui32_t(v); }
-        i64_t operator "" _i64(unsigned long long int v)    { return i64_t(v); }
-        ui64_t operator "" _ui64(unsigned long long int v)  { return ui64_t(v); }
-        float_t operator "" _f(long double v)               { return float_t(v); }
-        double_t operator "" _d(long double v)              { return double_t(v); }
+        i8_t operator "" _i8(unsigned long long int v)      { return i8_t(int8_t(v)); }
+        ui8_t operator "" _ui8(unsigned long long int v)    { return ui8_t(int8_t(v)); }
+        i16_t operator "" _i16(unsigned long long int v)    { return i16_t(int16_t(v)); }
+        ui16_t operator "" _ui16(unsigned long long int v)  { return ui16_t(int16_t(v)); }
+        i32_t operator "" _i32(unsigned long long int v)    { return i32_t(int32_t(v)); }
+        ui32_t operator "" _ui32(unsigned long long int v)  { return ui32_t(int32_t(v)); }
+        i64_t operator "" _i64(unsigned long long int v)    { return i64_t(int64_t(v)); }
+        ui64_t operator "" _ui64(unsigned long long int v)  { return ui64_t(int64_t(v)); }
+        f_t operator "" _f(long double v)               { return f_t(float(v)); }
+        d_t operator "" _d(long double v)              { return d_t(double(v)); }
     }
 }
 
@@ -156,8 +160,8 @@ std::ostream& operator<<(std::ostream& os, const primitive::i32_t& v) { os << v.
 std::ostream& operator<<(std::ostream& os, const primitive::ui32_t& v) { os << v.raw(); return os; }
 std::ostream& operator<<(std::ostream& os, const primitive::i64_t& v) { os << v.raw(); return os; }
 std::ostream& operator<<(std::ostream& os, const primitive::ui64_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, const primitive::float_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, const primitive::double_t& v) { os << v.raw(); return os; }
+std::ostream& operator<<(std::ostream& os, const primitive::f_t& v) { os << v.raw(); return os; }
+std::ostream& operator<<(std::ostream& os, const primitive::d_t& v) { os << v.raw(); return os; }
 std::ostream& operator<<(std::ostream& os, volatile const primitive::i8_t& v) { os << v.raw(); return os; }
 std::ostream& operator<<(std::ostream& os, volatile const primitive::ui8_t& v) { os << v.raw(); return os; }
 std::ostream& operator<<(std::ostream& os, volatile const primitive::i16_t& v) { os << v.raw(); return os; }
@@ -166,8 +170,8 @@ std::ostream& operator<<(std::ostream& os, volatile const primitive::i32_t& v) {
 std::ostream& operator<<(std::ostream& os, volatile const primitive::ui32_t& v) { os << v.raw(); return os; }
 std::ostream& operator<<(std::ostream& os, volatile const primitive::i64_t& v) { os << v.raw(); return os; }
 std::ostream& operator<<(std::ostream& os, volatile const primitive::ui64_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, volatile const primitive::float_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, volatile const primitive::double_t& v) { os << v.raw(); return os; }
+std::ostream& operator<<(std::ostream& os, volatile const primitive::f_t& v) { os << v.raw(); return os; }
+std::ostream& operator<<(std::ostream& os, volatile const primitive::d_t& v) { os << v.raw(); return os; }
 
 std::istream& operator>>(std::istream& is, primitive::i8_t& v) { int8_t iv; is >> iv; v = iv; return is; }
 std::istream& operator>>(std::istream& is, primitive::ui8_t& v) { uint8_t iv; is >> iv; v = iv; return is; }
@@ -177,8 +181,8 @@ std::istream& operator>>(std::istream& is, primitive::i32_t& v) { int32_t iv; is
 std::istream& operator>>(std::istream& is, primitive::ui32_t& v) { uint32_t iv; is >> iv; v = iv; return is; }
 std::istream& operator>>(std::istream& is, primitive::i64_t& v) { int64_t iv; is >> iv; v = iv; return is; }
 std::istream& operator>>(std::istream& is, primitive::ui64_t& v) { uint64_t iv; is >> iv; v = iv; return is; }
-std::istream& operator>>(std::istream& is, primitive::float_t& v) { float iv; is >> iv; v = iv; return is; }
-std::istream& operator>>(std::istream& is, primitive::double_t& v) { double iv; is >> iv; v = iv; return is; }
+std::istream& operator>>(std::istream& is, primitive::f_t& v) { float iv; is >> iv; v = iv; return is; }
+std::istream& operator>>(std::istream& is, primitive::d_t& v) { double iv; is >> iv; v = iv; return is; }
 
 namespace std
 {
@@ -190,6 +194,6 @@ namespace std
     template <> struct hash<primitive::ui32_t> { std::size_t operator()(const primitive::ui32_t& v) const noexcept { return v.to<std::size_t>(); } };
     template <> struct hash<primitive::i64_t> { std::size_t operator()(const primitive::i64_t& v) const noexcept { return v.to<std::size_t>(); } };
     template <> struct hash<primitive::ui64_t> { std::size_t operator()(const primitive::ui64_t& v) const noexcept { return v.to<std::size_t>(); } };
-    template <> struct hash<primitive::float_t> { std::size_t operator()(const primitive::float_t& v) const noexcept { return v.to<std::size_t>(); } };
-    template <> struct hash<primitive::double_t> { std::size_t operator()(const primitive::double_t& v) const noexcept { return v.to<std::size_t>(); } };
+    template <> struct hash<primitive::f_t> { std::size_t operator()(const primitive::f_t& v) const noexcept { return v.to<std::size_t>(); } };
+    template <> struct hash<primitive::d_t> { std::size_t operator()(const primitive::d_t& v) const noexcept { return v.to<std::size_t>(); } };
 }
