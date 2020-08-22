@@ -38,3 +38,4 @@ int main()
 }
 ```
 # Installation
+Just copy the header into your project.
