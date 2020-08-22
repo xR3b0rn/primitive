@@ -4,7 +4,7 @@ C++ primitive data type wrapper
 * Comparsion chaining
 * STL support for `std::ostream`, `std::istream`, `std::hash`
 * Member casting functions such as `to_s`, `to_ws`, `cast<T>`, ...
-* Types are more restrictive than primitives in ISO C++
+* Types are more restrictive than primitives in ISO C++, i.e. `i64_t var = ui64_t(0)` will error
 # Usage
 ```C++
 #include <pair>
