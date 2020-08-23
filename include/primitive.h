@@ -163,17 +163,17 @@ namespace primitive
 
     namespace literals
     {
-        i8_t operator "" _i8(unsigned long long int v)      { return i8_t(int8_t(v)); }
-        ui8_t operator "" _ui8(unsigned long long int v)    { return ui8_t(int8_t(v)); }
-        i16_t operator "" _i16(unsigned long long int v)    { return i16_t(int16_t(v)); }
-        ui16_t operator "" _ui16(unsigned long long int v)  { return ui16_t(int16_t(v)); }
-        i32_t operator "" _i32(unsigned long long int v)    { return i32_t(int32_t(v)); }
-        ui32_t operator "" _ui32(unsigned long long int v)  { return ui32_t(int32_t(v)); }
-        i64_t operator "" _i64(unsigned long long int v)    { return i64_t(int64_t(v)); }
-        ui64_t operator "" _ui64(unsigned long long int v)  { return ui64_t(int64_t(v)); }
-        f_t operator "" _f(long double v)                   { return f_t(float(v)); }
-        d_t operator "" _d(long double v)                   { return d_t(double(v)); }
-        siz_t operator "" _siz(long double v)               { return siz_t(std::size_t(v)); }
+        constexpr i8_t operator "" _i8(unsigned long long int v)      { return i8_t(int8_t(v)); }
+        constexpr ui8_t operator "" _ui8(unsigned long long int v)    { return ui8_t(int8_t(v)); }
+        constexpr i16_t operator "" _i16(unsigned long long int v)    { return i16_t(int16_t(v)); }
+        constexpr ui16_t operator "" _ui16(unsigned long long int v)  { return ui16_t(int16_t(v)); }
+        constexpr i32_t operator "" _i32(unsigned long long int v)    { return i32_t(int32_t(v)); }
+        constexpr ui32_t operator "" _ui32(unsigned long long int v)  { return ui32_t(int32_t(v)); }
+        constexpr i64_t operator "" _i64(unsigned long long int v)    { return i64_t(int64_t(v)); }
+        constexpr ui64_t operator "" _ui64(unsigned long long int v)  { return ui64_t(int64_t(v)); }
+        constexpr f_t operator "" _f(long double v)                   { return f_t(float(v)); }
+        constexpr d_t operator "" _d(long double v)                   { return d_t(double(v)); }
+        constexpr siz_t operator "" _siz(long double v)               { return siz_t(std::size_t(v)); }
     }
 }
 
