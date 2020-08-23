@@ -159,6 +159,7 @@ namespace primitive
     using ui64_t = detail::primitive<uint64_t>;
     using f_t = detail::primitive<float>;
     using d_t = detail::primitive<double>;
+    using siz_t = detail::primitive<std::size_t>;
 
     namespace literals
     {
@@ -170,8 +171,9 @@ namespace primitive
         ui32_t operator "" _ui32(unsigned long long int v)  { return ui32_t(int32_t(v)); }
         i64_t operator "" _i64(unsigned long long int v)    { return i64_t(int64_t(v)); }
         ui64_t operator "" _ui64(unsigned long long int v)  { return ui64_t(int64_t(v)); }
-        f_t operator "" _f(long double v)               { return f_t(float(v)); }
-        d_t operator "" _d(long double v)              { return d_t(double(v)); }
+        f_t operator "" _f(long double v)                   { return f_t(float(v)); }
+        d_t operator "" _d(long double v)                   { return d_t(double(v)); }
+        siz_t operator "" _siz(long double v)               { return siz_t(std::size_t(v)); }
     }
 }
 
