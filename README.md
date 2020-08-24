@@ -7,7 +7,6 @@ C++ primitive data type wrapper
 * Types are more restrictive than primitives in ISO C++, i.e. `i64_t var = ui64_t(0)` will error
 # Usage
 ```C++
-#include <pair>
 #include "primitive.h"
 
 using namespace primitive;
