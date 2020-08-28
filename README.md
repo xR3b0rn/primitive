@@ -31,8 +31,7 @@ int main()
     if (0_i64 < pixel.x < window.width && 0_i64 < pixel.y < window.height)
     {
         auto x = pixel.x.to<d_t>().to_s();
-        auto y = pixel.y.to<d_t>().to_s();
-        std::cout << "pixel.x=" << x << " pixel.y=" << y << std::endl;
+        std::cout << "pixel.x=" << x << " pixel.y=" << pixel.y << std::endl;
     }
 }
 ```
