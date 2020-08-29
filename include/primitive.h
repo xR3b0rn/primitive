@@ -1,18 +1,14 @@
 /*
 MIT License
-
 Copyright (c) 2020 xR3b0rn
-
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
-
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,7 +16,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
 Home: https://github.com/xR3b0rn/primitive
 */
 
@@ -50,7 +45,7 @@ namespace primitive
                     : _result(result)
                     , _last(last)
                 {}
-                explicit inline constexpr operator bool() const noexcept { return _result; }
+                inline constexpr operator bool() const noexcept { return _result; }
                 inline constexpr auto operator<(const U& other) const noexcept { return proxy(_result & (_last._v < other._v), other); }
                 inline constexpr auto operator>(const U& other) const noexcept { return proxy(_result & (_last._v > other._v), other); }
                 inline constexpr auto operator<=(const U& other) const noexcept { return proxy(_result & (_last._v <= other._v), other); }
@@ -86,12 +81,12 @@ namespace primitive
             explicit inline constexpr operator T() volatile noexcept { return _v; }
             explicit inline constexpr operator const T() volatile const noexcept { return _v; }
             inline constexpr auto& operator=(const T& n) noexcept { _v = n; return *this; }
-            inline constexpr auto operator<(const self_t& other) const noexcept { return proxy(_v < other._v, other); }
-            inline constexpr auto operator>(const self_t& other) const noexcept { return proxy(_v > other._v, other); }
-            inline constexpr auto operator<=(const self_t& other) const noexcept { return proxy(_v <= other._v, other); }
-            inline constexpr auto operator>=(const self_t& other) const noexcept { return proxy(_v >= other._v, other); }
-            inline constexpr auto operator==(const self_t& other) const noexcept { return proxy(_v == other._v, other); }
-            inline constexpr auto operator!=(const self_t& other) const noexcept { return proxy(_v != other._v, other); }
+            inline constexpr auto operator<(const self_t& other) const noexcept { return proxy<self_t>(_v < other._v, other); }
+            inline constexpr auto operator>(const self_t& other) const noexcept { return proxy<self_t>(_v > other._v, other); }
+            inline constexpr auto operator<=(const self_t& other) const noexcept { return proxy<self_t>(_v <= other._v, other); }
+            inline constexpr auto operator>=(const self_t& other) const noexcept { return proxy<self_t>(_v >= other._v, other); }
+            inline constexpr auto operator==(const self_t& other) const noexcept { return proxy<self_t>(_v == other._v, other); }
+            inline constexpr auto operator!=(const self_t& other) const noexcept { return proxy<self_t>(_v != other._v, other); }
             inline constexpr auto operator++() noexcept { _v++; return *this; }
             inline constexpr auto operator++(int) noexcept { auto old = *this; _v++; return old; }
             inline constexpr auto operator--() noexcept { _v--; return *this; }
@@ -110,11 +105,15 @@ namespace primitive
             template <class U = void> inline constexpr auto operator&(const self_t other) const noexcept { return self_t(_v & other.raw()); }
             template <class U = void> inline constexpr auto operator|(const self_t other) const noexcept { return self_t(_v | other.raw()); }
             template <class U = void> inline constexpr auto operator~() const noexcept { return self_t(~_v); }
-            template <class U = void> inline constexpr auto operator^=(const self_t other) const noexcept { _v ^= other.raw(); return *this; }
-            template <class U = void> inline constexpr auto operator&=(const self_t other) const noexcept { _v &= other.raw(); return *this; }
-            template <class U = void> inline constexpr auto operator|=(const self_t other) const noexcept { _v |= other.raw(); return *this; }
+            template <class U = void> inline constexpr auto operator<<(const self_t other) const noexcept { return self_t(_v << other.raw()); }
+            template <class U = void> inline constexpr auto operator>>(const self_t other) const noexcept { return self_t(_v >> other.raw()); }
+            template <class U = void> inline constexpr auto operator^=(const self_t other) noexcept { _v ^= other.raw(); return *this; }
+            template <class U = void> inline constexpr auto operator&=(const self_t other) noexcept { _v &= other.raw(); return *this; }
+            template <class U = void> inline constexpr auto operator|=(const self_t other) noexcept { _v |= other.raw(); return *this; }
+            template <class U = void> inline constexpr auto operator<<=(const self_t other) noexcept { _v <<= other.raw(); return *this; }
+            template <class U = void> inline constexpr auto operator>>=(const self_t other) noexcept { _v >>= other.raw(); return *this; }
             template <class U> inline constexpr auto to() const noexcept { return static_cast<U>(_v); }
-            template <class U> inline constexpr auto cast() const noexcept { return reinterpret_cast<U>(_v); }
+            template <class U> inline constexpr auto cast() const noexcept { return *reinterpret_cast<const U*>(&_v); }
             inline constexpr T& raw() noexcept { return _v; }
             inline constexpr const T& raw() const noexcept { return _v; }
             inline constexpr volatile T& raw() volatile noexcept { return _v; }
