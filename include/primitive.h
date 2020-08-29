@@ -138,7 +138,7 @@ namespace primitive
             inline constexpr auto operator*=(volatile const self_t& other) volatile noexcept { _v *= other.raw(); return *this; }
             inline constexpr auto operator/=(volatile const self_t& other) volatile { _v /= other.raw(); return *this; }
             template <class U> inline constexpr auto to() volatile const noexcept { return static_cast<U>(_v); }
-            template <class U> inline constexpr auto cast() volatile const noexcept { return *reinterpret_cast<volatile const U*>(&_v); }
+            template <class U> inline constexpr auto cast() volatile const noexcept { return *reinterpret_cast<volatile const U*>(_v); }
             inline constexpr auto to_s() const noexcept { return std::to_string(_v); }
             inline constexpr auto to_ws() const noexcept { return std::to_wstring(_v); }
 
@@ -178,37 +178,37 @@ namespace primitive
     }
 }
 
-std::ostream& operator<<(std::ostream& os, const primitive::i8_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, const primitive::ui8_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, const primitive::i16_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, const primitive::ui16_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, const primitive::i32_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, const primitive::ui32_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, const primitive::i64_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, const primitive::ui64_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, const primitive::f_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, const primitive::d_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, volatile const primitive::i8_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, volatile const primitive::ui8_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, volatile const primitive::i16_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, volatile const primitive::ui16_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, volatile const primitive::i32_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, volatile const primitive::ui32_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, volatile const primitive::i64_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, volatile const primitive::ui64_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, volatile const primitive::f_t& v) { os << v.raw(); return os; }
-std::ostream& operator<<(std::ostream& os, volatile const primitive::d_t& v) { os << v.raw(); return os; }
+template <class T = void> std::ostream& operator<<(std::ostream& os, const primitive::i8_t& v) { os << v.raw(); return os; }
+template <class T = void> std::ostream& operator<<(std::ostream& os, const primitive::ui8_t& v) { os << v.raw(); return os; }
+template <class T = void> std::ostream& operator<<(std::ostream& os, const primitive::i16_t& v) { os << v.raw(); return os; }
+template <class T = void> std::ostream& operator<<(std::ostream& os, const primitive::ui16_t& v) { os << v.raw(); return os; }
+template <class T = void> std::ostream& operator<<(std::ostream& os, const primitive::i32_t& v) { os << v.raw(); return os; }
+template <class T = void> std::ostream& operator<<(std::ostream& os, const primitive::ui32_t& v) { os << v.raw(); return os; }
+template <class T = void> std::ostream& operator<<(std::ostream& os, const primitive::i64_t& v) { os << v.raw(); return os; }
+template <class T = void> std::ostream& operator<<(std::ostream& os, const primitive::ui64_t& v) { os << v.raw(); return os; }
+template <class T = void> std::ostream& operator<<(std::ostream& os, const primitive::f_t& v) { os << v.raw(); return os; }
+template <class T = void> std::ostream& operator<<(std::ostream& os, const primitive::d_t& v) { os << v.raw(); return os; }
+template <class T = void> std::ostream& operator<<(std::ostream& os, volatile const primitive::i8_t& v) { os << v.raw(); return os; }
+template <class T = void> std::ostream& operator<<(std::ostream& os, volatile const primitive::ui8_t& v) { os << v.raw(); return os; }
+template <class T = void> std::ostream& operator<<(std::ostream& os, volatile const primitive::i16_t& v) { os << v.raw(); return os; }
+template <class T = void> std::ostream& operator<<(std::ostream& os, volatile const primitive::ui16_t& v) { os << v.raw(); return os; }
+template <class T = void> std::ostream& operator<<(std::ostream& os, volatile const primitive::i32_t& v) { os << v.raw(); return os; }
+template <class T = void> std::ostream& operator<<(std::ostream& os, volatile const primitive::ui32_t& v) { os << v.raw(); return os; }
+template <class T = void> std::ostream& operator<<(std::ostream& os, volatile const primitive::i64_t& v) { os << v.raw(); return os; }
+template <class T = void> std::ostream& operator<<(std::ostream& os, volatile const primitive::ui64_t& v) { os << v.raw(); return os; }
+template <class T = void> std::ostream& operator<<(std::ostream& os, volatile const primitive::f_t& v) { os << v.raw(); return os; }
+template <class T = void> std::ostream& operator<<(std::ostream& os, volatile const primitive::d_t& v) { os << v.raw(); return os; }
 
-std::istream& operator>>(std::istream& is, primitive::i8_t& v) { int8_t iv; is >> iv; v = iv; return is; }
-std::istream& operator>>(std::istream& is, primitive::ui8_t& v) { uint8_t iv; is >> iv; v = iv; return is; }
-std::istream& operator>>(std::istream& is, primitive::i16_t& v) { int16_t iv; is >> iv; v = iv; return is; }
-std::istream& operator>>(std::istream& is, primitive::ui16_t& v) { uint16_t iv; is >> iv; v = iv; return is; }
-std::istream& operator>>(std::istream& is, primitive::i32_t& v) { int32_t iv; is >> iv; v = iv; return is; }
-std::istream& operator>>(std::istream& is, primitive::ui32_t& v) { uint32_t iv; is >> iv; v = iv; return is; }
-std::istream& operator>>(std::istream& is, primitive::i64_t& v) { int64_t iv; is >> iv; v = iv; return is; }
-std::istream& operator>>(std::istream& is, primitive::ui64_t& v) { uint64_t iv; is >> iv; v = iv; return is; }
-std::istream& operator>>(std::istream& is, primitive::f_t& v) { float iv; is >> iv; v = iv; return is; }
-std::istream& operator>>(std::istream& is, primitive::d_t& v) { double iv; is >> iv; v = iv; return is; }
+template <class T = void> std::istream& operator>>(std::istream& is, primitive::i8_t& v) { int8_t iv; is >> iv; v = iv; return is; }
+template <class T = void> std::istream& operator>>(std::istream& is, primitive::ui8_t& v) { uint8_t iv; is >> iv; v = iv; return is; }
+template <class T = void> std::istream& operator>>(std::istream& is, primitive::i16_t& v) { int16_t iv; is >> iv; v = iv; return is; }
+template <class T = void> std::istream& operator>>(std::istream& is, primitive::ui16_t& v) { uint16_t iv; is >> iv; v = iv; return is; }
+template <class T = void> std::istream& operator>>(std::istream& is, primitive::i32_t& v) { int32_t iv; is >> iv; v = iv; return is; }
+template <class T = void> std::istream& operator>>(std::istream& is, primitive::ui32_t& v) { uint32_t iv; is >> iv; v = iv; return is; }
+template <class T = void> std::istream& operator>>(std::istream& is, primitive::i64_t& v) { int64_t iv; is >> iv; v = iv; return is; }
+template <class T = void> std::istream& operator>>(std::istream& is, primitive::ui64_t& v) { uint64_t iv; is >> iv; v = iv; return is; }
+template <class T = void> std::istream& operator>>(std::istream& is, primitive::f_t& v) { float iv; is >> iv; v = iv; return is; }
+template <class T = void> std::istream& operator>>(std::istream& is, primitive::d_t& v) { double iv; is >> iv; v = iv; return is; }
 
 namespace std
 {
