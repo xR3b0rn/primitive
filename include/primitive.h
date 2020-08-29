@@ -138,7 +138,7 @@ namespace primitive
             inline constexpr auto operator*=(volatile const self_t& other) volatile noexcept { _v *= other.raw(); return *this; }
             inline constexpr auto operator/=(volatile const self_t& other) volatile { _v /= other.raw(); return *this; }
             template <class U> inline constexpr auto to() volatile const noexcept { return static_cast<U>(_v); }
-            template <class U> inline constexpr auto cast() volatile const noexcept { return reinterpret_cast<U>(_v); }
+            template <class U> inline constexpr auto cast() volatile const noexcept { return *reinterpret_cast<volatile const U*>(&_v); }
             inline constexpr auto to_s() const noexcept { return std::to_string(_v); }
             inline constexpr auto to_ws() const noexcept { return std::to_wstring(_v); }
 
