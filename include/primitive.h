@@ -81,6 +81,7 @@ namespace primitive
             explicit inline constexpr operator T() volatile noexcept { return _v; }
             explicit inline constexpr operator const T() volatile const noexcept { return _v; }
             inline constexpr auto& operator=(const T& n) noexcept { _v = n; return *this; }
+            inline constexpr auto operator-() const noexcept { return self_t(_v * -1); }
             inline constexpr auto operator<(const self_t& other) const noexcept { return proxy<self_t>(_v < other._v, other); }
             inline constexpr auto operator>(const self_t& other) const noexcept { return proxy<self_t>(_v > other._v, other); }
             inline constexpr auto operator<=(const self_t& other) const noexcept { return proxy<self_t>(_v <= other._v, other); }
